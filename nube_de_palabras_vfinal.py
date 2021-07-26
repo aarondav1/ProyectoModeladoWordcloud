@@ -42,8 +42,6 @@ class WebScrapping():
         para manejo de datos html.
         '''
         self.usuario = Usuario(id_usuario)
-        #self.url = 'https://es.stackoverflow.com/users/'
-        #·self.url = self.url + self.usuario.id_usuario +"?tab=tags"
         self.url = self.usuario.url
         response = requests.get(self.url)
         self.soup = BeautifulSoup(response.content, 'html.parser')
@@ -89,8 +87,6 @@ class WebScrapping():
                 if int(data.text) != 0:
                     rep = int(data.text)
                     while rep > 0:
-                        #self.archivo.write(self.etiquetas[longitud].text)
-                        #self.archivo.write('\n')
                         arhivotxt.write(self.etiquetas[longitud].text)
                         arhivotxt.write('\n')
                         rep -= 1
@@ -102,7 +98,6 @@ class WebScrapping():
         '''
         self.usuario.url = self.url
         textdata = ""
-        #nube = open('Datos.txt', 'r+')
         with open("Datos.txt", "r+") as nube:
             textdata = nube.read().replace('-', '')
         wordcloud = WordCloud(background_color='white', max_words=900,
@@ -117,7 +112,9 @@ def main():
     '''
     Método principal
     '''
-    nube = WebScrapping("32292")
+    #nube = WebScrapping("32292")
+    id_usuario = input("Ingrese el id del usuario: ")
+    nube = WebScrapping(id_usuario)
     nube.extraer_datos()
     nube.generar_txt()
     nube.generar_wordcloud()
