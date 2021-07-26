@@ -1,5 +1,5 @@
 '''
-PROGRAMA
+PROGRAMA QUE GENERE UNA NUBE DE PALABRAS A PARTIR DEL ID DE UN USUARIO DE STACK OVERFLOW EN ESPAÑOL.
 '''
 import sys
 from bs4 import BeautifulSoup
@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 
 class Usuario():
     '''
-    Esta clase ewiofjw fwoj fwoifwjefoije foiwjfwoifj.
+    Clase Usuario que contendra el id y url.
     '''
     def __init__(self, id_usuario):
         '''
-        Metodo constructor de la clase usuario, recibe el id de usuario.
+        Método constructor de la clase usuario, recibe el id de usuario y genera la url.
         '''
         self.id_usuario = id_usuario
         self.url = 'https://es.stackoverflow.com/users/' + self.id_usuario + '?tab=tags'
@@ -22,23 +22,23 @@ class Usuario():
 
     def mostrar_id(self):
         '''
-        kjfekjfekrelj
+        Método que muestre por consola el id de usuario.
         '''
         print(self.id_usuario)
 
     def mostrar_url(self):
         '''
-        kjfekjfekrelj
+        Método que muestre por consola la url de usuario.
         '''
         print(self.url)
 
 class WebScrapping():
     '''
-    Clase que contendra los metodos de extraccion y manejo de los datos html
+    Clase que contendra los metodos de extraccion de informacion y manejo de los datos html
     '''
     def __init__(self, id_usuario):
         '''
-        efwfiwefiuwehfiweufhweuifhwef uwihfewiufhwefuih
+        Constructor de WebScrapping, recibe el id de usuario e inicializa las variables para manejo de datos html.
         '''
         self.usuario = Usuario(id_usuario)
         #self.url = 'https://es.stackoverflow.com/users/'
@@ -52,7 +52,7 @@ class WebScrapping():
 
     def extraer_datos(self):
         '''
-        x
+        Método que analizara el archivo html, buscara todas las etiquetas que posea el usuario y las guardara en la lista etiquetas.
         '''
         try:
             self.datos = self.codigo.find_all('div', class_='answer-votes')
@@ -79,9 +79,8 @@ class WebScrapping():
                 self.etiquetas = self.etiquetas + mas_tags
     def generar_txt(self):
         '''
-        x
+        Método que genera un archico de texto a partir de la lista de etiquetas, esto nos ayudara a generar la nube de palabras.
         '''
-        #self.archivo = open("Datos.txt", "w")
         with open("Datos.txt", "w") as arhivotxt:
             for longitud, data in enumerate(self.datos):
                 if int(data.text) != 0:
@@ -92,11 +91,10 @@ class WebScrapping():
                         arhivotxt.write(self.etiquetas[longitud].text)
                         arhivotxt.write('\n')
                         rep -= 1
-        #self.archivo.close()
 
     def generar_wordcloud(self):
         '''
-        x
+        Método que genera la nube de palabras a partir del archivo de texto y lo muestra por pantalla.
         '''
         self.usuario.url = self.url
         textdata = ""
@@ -113,7 +111,7 @@ class WebScrapping():
 
 def main():
     '''
-    kjfekjfekrelj
+    Método principal
     '''
     nube = WebScrapping("32292")
     nube.extraer_datos()
