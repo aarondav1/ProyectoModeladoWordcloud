@@ -38,7 +38,8 @@ class WebScrapping():
     '''
     def __init__(self, id_usuario):
         '''
-        Constructor de WebScrapping, recibe el id de usuario e inicializa las variables para manejo de datos html.
+        Constructor de WebScrapping, recibe el id de usuario e inicializa las variables
+        para manejo de datos html.
         '''
         self.usuario = Usuario(id_usuario)
         #self.url = 'https://es.stackoverflow.com/users/'
@@ -52,7 +53,8 @@ class WebScrapping():
 
     def extraer_datos(self):
         '''
-        Método que analizara el archivo html, buscara todas las etiquetas que posea el usuario y las guardara en la lista etiquetas.
+        Método que analizara el archivo html, buscara todas las etiquetas que posea el usuario
+        y las guardara en la lista etiquetas.
         '''
         try:
             self.datos = self.codigo.find_all('div', class_='answer-votes')
@@ -79,7 +81,8 @@ class WebScrapping():
                 self.etiquetas = self.etiquetas + mas_tags
     def generar_txt(self):
         '''
-        Método que genera un archico de texto a partir de la lista de etiquetas, esto nos ayudara a generar la nube de palabras.
+        Método que genera un archico de texto a partir de la lista de etiquetas, esto nos
+        ayudara a generar la nube de palabras.
         '''
         with open("Datos.txt", "w") as arhivotxt:
             for longitud, data in enumerate(self.datos):
@@ -94,7 +97,8 @@ class WebScrapping():
 
     def generar_wordcloud(self):
         '''
-        Método que genera la nube de palabras a partir del archivo de texto y lo muestra por pantalla.
+        Método que genera la nube de palabras a partir del archivo de texto y lo
+        muestra por pantalla.
         '''
         self.usuario.url = self.url
         textdata = ""
